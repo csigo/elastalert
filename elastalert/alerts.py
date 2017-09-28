@@ -238,6 +238,8 @@ class Alerter(object):
 
     def create_alert_body(self, matches):
         body = self.get_aggregation_summary_text(matches)
+        if self.rule.get('alert_text_type') == 'summary_table_only':
+            return body
         for match in matches:
             body += unicode(BasicMatchString(self.rule, match))
             # Separate text of aggregated alerts with dashes
